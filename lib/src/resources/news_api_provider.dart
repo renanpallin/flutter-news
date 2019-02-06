@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:flutter_news/src/models/item_model.dart';
 import 'package:http/http.dart' show Client;
+import 'repository.dart';
 
 final _apiRoot = 'https://hacker-news.firebaseio.com/v0';
 
-class NewsApiProvider {
-  
+class NewsApiProvider implements Source {
   Client client = Client();
+
   Future<List<int>> fetchTopIds() async {
     final response = await client.get('$_apiRoot/topstories.json');
     final ids = json.decode(response.body);

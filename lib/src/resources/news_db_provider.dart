@@ -5,8 +5,16 @@ import 'package:path/path.dart';
 import 'dart:async';
 import '../models/item_model.dart';
 
-class NewsDbProvider {
+import 'repository.dart';
+
+class NewsDbProvider implements Source, Cache {
   Database db;
+
+  @override
+  Future<List<int>> fetchTopIds() {
+    // TODO: implement fetchTopIds
+    return null;
+  }
 
   init() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
@@ -44,7 +52,7 @@ class NewsDbProvider {
       whereArgs: [id],
     );
 
-    if (maps.length > 0 ) {
+    if (maps.length > 0) {
       return ItemModel.fromDb(maps.first);
     }
 
