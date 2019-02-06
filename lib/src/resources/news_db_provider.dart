@@ -7,8 +7,16 @@ import '../models/item_model.dart';
 
 import 'repository.dart';
 
+/**
+ * TODO: Isso é um rascunho de singleton,
+ * mas tem falhas... Arrumar
+ */
 class NewsDbProvider implements Source, Cache {
   Database db;
+
+  NewsDbProvider() {
+    newsDbProvider.init();
+  }
 
   @override
   Future<List<int>> fetchTopIds() {
@@ -66,3 +74,6 @@ class NewsDbProvider implements Source, Cache {
     return db.insert('Items', item.toMap());
   }
 }
+
+
+NewsDbProvider newsDbProvider = NewsDbProvider();
