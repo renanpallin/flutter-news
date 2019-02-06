@@ -36,7 +36,7 @@ class NewsDbProvider {
     );
   }
 
-  fetchItem(int id) async {
+  Future<ItemModel> fetchItem(int id) async {
     final maps = await db.query(
       'Items',
       columns: null,
@@ -51,10 +51,10 @@ class NewsDbProvider {
     return null;
   }
 
-  addItem(ItemModel item) {
+  Future<int> addItem(ItemModel item) {
     // É uma operação asyncrona, mas não esperamos mesmo,
     // não é interessante fazer nada com esse valor e mesmo
     // se falhar, vamos continuar com o app normalmente
-    db.insert('Items', item.toMap());
+    return db.insert('Items', item.toMap());
   }
 }
