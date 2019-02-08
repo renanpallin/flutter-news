@@ -15,7 +15,7 @@ class NewsDbProvider implements Source, Cache {
   Database db;
 
   NewsDbProvider() {
-    newsDbProvider.init();
+    this.init();
   }
 
   @override
