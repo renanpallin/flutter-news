@@ -13,10 +13,21 @@ class NewsListTile extends StatelessWidget {
 
     return StreamBuilder(
       stream: bloc.items,
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
         if (!snapshot.hasData) {
           return Text('Stream still loading...');
         }
+
+        return FutureBuilder(
+          future: snapshot.data[itemId],
+          builder: (context, AsyncSnapshot<ItemModel> itemSnapshot) {
+            if (!itemSnapshot.hasData) {
+              return Text('Stream still loading $itemId');
+            }
+
+            return Text(itemSnapshot.data.title);
+          },
+        );
       },
     );
   }
