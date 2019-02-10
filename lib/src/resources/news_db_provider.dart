@@ -71,9 +71,13 @@ class NewsDbProvider implements Source, Cache {
     // É uma operação asyncrona, mas não esperamos mesmo,
     // não é interessante fazer nada com esse valor e mesmo
     // se falhar, vamos continuar com o app normalmente
-    return db.insert('Items', item.toMap());
+    return db.insert(
+      'Items',
+      item.toMap(),
+      // Jeito fácil de ignorar `UNIQUE constraint failed: Items.id`
+      // conflictAlgorithm: ConflictAlgorithm.ignore,
+    );
   }
 }
-
 
 NewsDbProvider newsDbProvider = NewsDbProvider();

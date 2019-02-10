@@ -14,6 +14,19 @@ class Repository {
   ];
 
   Future<List<int>> fetchTopIds() {
+    // Future<List<int>> topIds;
+    // Source s;
+
+    // for (s in sources) {
+    //    topIds = s.fetchTopIds();
+
+    //    if (topIds != null) {
+    //      return topIds;
+    //    }
+    // }
+
+    // return null;
+
     // GAMBIARRA
     return sources[1].fetchTopIds();
   }
@@ -30,7 +43,15 @@ class Repository {
     }
 
     for (Cache cache in caches) {
-      cache.addItem(item);
+      /*
+      Resolve o problema de pegar de uma Source
+      e adicionar no Cache que é a mesma instância,
+      como é o caso do NewsDbProvider, que implementa
+      tanto o Source quanto o Cache
+      */
+      if (source != (cache as dynamic)) {
+        cache.addItem(item);
+      }
     }
 
     return item;
