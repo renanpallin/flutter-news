@@ -5,6 +5,15 @@ import '../resources/repository.dart';
 class StoriesBloc {
   final _repository = Repository();
   final _topIds = PublishSubject<List<int>>();
+  /*
+  Esse fluxo com uma stream para fetcher que utiliza o transform e faz um 
+  pipe para uma stream de output tem um motivo: Evitar que o transform seja
+  chamado pelo número de vezes que a stream antiga (se não tivesse esse monte)
+  fosse chamada com o método `listen`. Ou seja, a cada listem na stream, o 
+  evento é passado pelo transform. Dessa maneira, asseguramos que acontece apenas
+  uma vez, já que a stream de input (`_itemsFetcher.stream`) é quem faz o
+  trasnform e que passa para a de output
+  */
   final _itemsOutput = BehaviorSubject<Map<int, Future<ItemModel>>>();
   final _itemsFetcher = PublishSubject<int>();
 
