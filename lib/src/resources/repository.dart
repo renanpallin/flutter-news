@@ -58,8 +58,7 @@ class Repository {
   }
 
   clearCache() async {
-    ///
-    /// @todo: Future.wait([Futures])
+    // Future.wait(caches.map((cache) => cache.clear()));
     for (var cache in caches) {
       await cache.clear();
     }
