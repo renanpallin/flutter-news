@@ -20,7 +20,10 @@ class App extends StatelessWidget {
     return MaterialPageRoute(builder: (context) {
       /* Ótimo lugar para fazer inicializações e
       chamas em APIs para buscar dados */
-      return NewsDetail();
+      final itemId = int.parse(settings.name.replaceFirst('/', ''));
+      return NewsDetail(
+        itemId: itemId,
+      );
     });
   }
 }
