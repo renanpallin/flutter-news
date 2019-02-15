@@ -7,14 +7,20 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoriesProvider(
-      child: MaterialApp(
-        title: 'News!',
-        onGenerateRoute: (RouteSettings settings) {
-          return MaterialPageRoute(builder: (context) {
-            return NewsList();
-          });
-        },
-      ),
+      child: MaterialApp(title: 'News!', onGenerateRoute: routes),
     );
+  }
+
+  Route routes(RouteSettings settings) {
+    if (settings.name == '/') {
+      return MaterialPageRoute(builder: (context) {
+        return NewsList();
+      });
+    }
+    return MaterialPageRoute(builder: (context) {
+      /* Ótimo lugar para fazer inicializações e
+      chamas em APIs para buscar dados */
+      return NewsDetail();
+    });
   }
 }
