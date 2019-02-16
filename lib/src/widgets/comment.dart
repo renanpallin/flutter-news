@@ -17,10 +17,16 @@ class Comment extends StatelessWidget {
           return Text('loading...');
         }
 
+        final item = snapshot.data;
+
         return Column(
           children: <Widget>[
-            Text(snapshot.data.text),
-          ]..addAll(snapshot.data.kids.map((kidId) {
+            ListTile(
+              title: item.text == '' ? Text('Deleted') : Text(item.text),
+              subtitle: item.by == '' ? Text('Deleted') : Text(item.by),
+            ),
+            Divider(),
+          ]..addAll(item.kids.map((kidId) {
               return Comment(
                 itemId: kidId,
                 itemMap: itemMap,
