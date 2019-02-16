@@ -17,7 +17,16 @@ class Comment extends StatelessWidget {
           return Text('loading...');
         }
 
-        return Text(snapshot.data.text);
+        return Column(
+          children: <Widget>[
+            Text(snapshot.data.text),
+          ]..addAll(snapshot.data.kids.map((kidId) {
+              return Comment(
+                itemId: kidId,
+                itemMap: itemMap,
+              );
+            })),
+        );
       },
     );
   }
