@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/item_model.dart';
 /// Existe uma versão basic dessa lib
 import 'package:html_unescape/html_unescape.dart';
+import 'loading_container.dart';
 
 class Comment extends StatelessWidget {
   final int itemId;
@@ -17,7 +18,7 @@ class Comment extends StatelessWidget {
       future: itemMap[itemId],
       builder: (context, AsyncSnapshot<ItemModel> snapshot) {
         if (!snapshot.hasData) {
-          return Text('loading...');
+          return LoadingContainer();
         }
 
         final item = snapshot.data;
