@@ -17,6 +17,9 @@ class App extends StatelessWidget {
   Route routes(RouteSettings settings) {
     if (settings.name == '/') {
       return MaterialPageRoute(builder: (context) {
+        final storiesBloc = StoriesProvider.of(context);
+        storiesBloc.fetchTopIds();
+        
         return NewsList();
       });
     }
@@ -28,7 +31,6 @@ class App extends StatelessWidget {
 
       /* Não esperamos por isso finalizar, vamos no async mesmo */
       commentsBloc.fetchItemWithComments(itemId);
-      
 
       return NewsDetail(
         itemId: itemId,
